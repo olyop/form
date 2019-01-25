@@ -1,0 +1,13 @@
+.AxiosError {}
+  .AxiosError__h1 {
+    font-size: 24px;
+    margin: 0 0 15px 0; }
+  .AxiosError__h2 {
+    font-size: 15px;
+    margin: 0 0 5px 0; }
+  .AxiosError__pre {
+    background-color: #FFCDD2;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px;
+    margin: 0 40px 15px 0px; }

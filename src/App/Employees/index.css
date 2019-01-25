@@ -1,0 +1,7 @@
+.Employees {
+  padding: 40px; }
+  .Employees__title {
+    font-size: 30px;
+    margin: 0 0 10px 0; }
+  pre {
+    margin-bottom: 20px; }

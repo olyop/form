@@ -1,0 +1,16 @@
+.Form {
+  width: 400px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+  .Form__heading {
+    background-color: #EEEEEE;
+    padding: 20px;
+    margin: 0;
+    font-size: 28px; }
+  .Form__fields {
+    padding: 20px; }
+  .Form__submit {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 20px 20px; }
+    .Form__status {
+      margin: 0 0 0 20px; }
