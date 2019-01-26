@@ -1,7 +1,8 @@
-.Employees {
-  padding: 40px; }
+.Employees {}
   .Employees__title {
-    font-size: 30px;
-    margin: 0 0 10px 0; }
-  pre {
-    margin-bottom: 20px; }
+    margin: 0;
+    padding: 20px;
+    font-size: 30px; }
+  .Employees__json {
+    margin: 0;
+    padding: 20px; }

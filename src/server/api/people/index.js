@@ -6,16 +6,16 @@ const fs = require('fs')
 
 const router = express.Router()
 
+const newDateObj = date => ({
+  year: date.format('YYYY'),
+  month: date.format('MM'),
+  day: date.format('DD')
+})
+
 router.get('/', (req, res) => {
   let file = path.join(__dirname, 'people.json')
   res.type('application/json')
   fs.createReadStream(file).pipe(res)
-})
-
-const newDateObj = now => ({
-  year: now.format('YYYY'),
-  month: now.format('MM'),
-  day: now.format('DD')
 })
 
 router.post('/', (req, res) => {

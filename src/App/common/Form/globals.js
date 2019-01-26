@@ -2,7 +2,7 @@ import moment from 'moment'
 
 export const maliciousStrings = ['<', '>', 'script']
 
-export const fieldTypes = ['text', 'number', 'date', 'mobileNumber', 'selection', 'boolean']
+export const fieldTypes = ['text', 'number', 'email', 'date', 'mobileNumber', 'selection', 'boolean']
 
 export const defField = {
   required: false,

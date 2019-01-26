@@ -13,7 +13,7 @@ import './index.css'
 
 const Field = props => {
   const { type } = props
-  if (type === 'text' || type === 'number') {
+  if (type === 'text' || type === 'number' || type === 'email') {
     return <TextType {...props} />
   } else if (type === 'date') {
     return <DateType {...props} />

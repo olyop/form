@@ -14,7 +14,7 @@ export const addEmployeesFormFields = [
     camelCase: 'familyName',
     type: 'text',
     required: true,
-    def: 'Oliver'
+    def: 'Plummer'
   },
   {
     name: 'Gender',
@@ -38,6 +38,13 @@ export const addEmployeesFormFields = [
     camelCase: 'mobileNumber',
     type: 'mobileNumber',
     required: true
+  },
+  {
+    name: 'Email',
+    camelCase: 'email',
+    type: 'email',
+    required: true,
+    def: 'oliver.plummer@outlook.com'
   },
   {
     name: 'State/Territory',

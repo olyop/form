@@ -5,9 +5,9 @@ import Button from '@material-ui/core/Button'
 import { inRange } from 'lodash'
 
 const determineColor = code => {
-  if (inRange(code, 100, 199)) { return '#333333' }
-  else if (inRange(code, 200, 399)) { return '#4CAF50' }
+  if (inRange(code, 200, 399)) { return '#4CAF50' }
   else if (inRange(code, 400, 599)) { return '#F44336' }
+  else { return '#333333' }
 }
 
 const Submit = ({ handleSubmit, status }) => (

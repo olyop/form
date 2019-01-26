@@ -19,7 +19,6 @@ const Selection = ({val,handleChange,name,camelCase,type,helperText,required,sel
       value={val}
       onChange={handleChange(type, camelCase)}
       input={<Input />}
-      style={{ marginRight: 8 }}
     >
       {selections.map(selection => (
         <MenuItem

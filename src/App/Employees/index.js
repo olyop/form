@@ -26,8 +26,10 @@ class Employees extends React.Component {
   addEmployee = (data, callback) => {
     axios.post(url, data)
       .then(res => {
-        callback(res)
-        this.setState({ employees: concat(this.state.employees, res.data) })
+        this.setState(
+          { employees: concat(this.state.employees, res.data) },
+          () => callback(res)
+        )
       })
       .catch(err => console.error(err))
   }
@@ -52,7 +54,7 @@ class Employees extends React.Component {
       return (
         <div className="Employees">
           <h1 className="Employees__title">Employees</h1>
-          <pre>{JSON.stringify(this.state.employees, null, 2)}</pre>
+          <pre className="Employees__json">{JSON.stringify(this.state.employees, null, 2)}</pre>
           <Form
             heading="Add Employee"
             fields={addEmployeesFormFields}

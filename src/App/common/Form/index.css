@@ -1,6 +1,4 @@
-.Form {
-  width: 400px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+.Form {}
   .Form__heading {
     background-color: #EEEEEE;
     padding: 20px;

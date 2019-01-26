@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { toNumber } from 'lodash'
 import { serializeFields, errState, checkIfErrors, reduceToErrState, newState } from './helpers'
 
-import Heading from './Heading'
 import Fields from './Fields'
 import Submit from './Submit'
 
@@ -20,7 +19,7 @@ class Form extends React.Component {
 
   handleChange = (type, camelCase) => event => {
     const { value, name } = event.target
-    if (type === 'text' || type === 'number' || type === 'selection') {
+    if (type === 'text' || type === 'number' || type === 'selection' || type === 'email') {
       this.setState(prevState => ({
         fields: {
           ...prevState.fields,
@@ -60,18 +59,17 @@ class Form extends React.Component {
   }
 
   handleStatus = res => {
-    this.setState({ status: { code: res.status, text: res.statusText } })
-    setTimeout(() => {
-      this.setState({ status: { code: null, text: '' } })
-    }, 5000)
+    this.setState({ status: { code: res.status, text: res.statusText } }, () => {
+      setTimeout(
+        () => this.setState({ status: { code: null, text: '' } }),
+        5000
+      )
+    })
   }
 
   render() {
     return (
       <div className="Form">
-        <Heading
-          text={this.props.heading}
-        />
         <Fields
           state={this.state}
           handleChange={this.handleChange}
@@ -94,12 +92,8 @@ const SerializeForm = props => (
 )
 
 SerializeForm.propTypes = {
-  heading: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSubmit: PropTypes.func.isRequired
-}
-SerializeForm.defaultProps = {
-  heading: 'Form'
 }
 
 export default SerializeForm

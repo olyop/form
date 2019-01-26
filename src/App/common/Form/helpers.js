@@ -21,7 +21,7 @@ export const serializeFields = fields => fields.map(
 const mapAndInitState = fields => fields.reduce(
   (state, field) => {
     const { type, def, camelCase, selections } = field
-    if (type === 'text') {
+    if (type === 'text' || type === 'email') {
       state[camelCase] = isNull(def) ? '' : def
     } else if (type === 'number') {
       state[camelCase] = isNull(def) ? 0 : def
