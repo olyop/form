@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var server = require('../src/express.js')
+var server = require('../index')
 var debug = require('debug')('express-gen:server')
 var http = require('http')
 
