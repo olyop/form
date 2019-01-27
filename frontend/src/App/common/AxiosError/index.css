@@ -1,13 +1,30 @@
-.AxiosError {}
+.AxiosError {
+  padding: 10px; }
   .AxiosError__h1 {
+    text-decoration: underline;
     font-size: 24px;
-    margin: 0 0 15px 0; }
-  .AxiosError__h2 {
-    font-size: 15px;
-    margin: 0 0 5px 0; }
-  .AxiosError__pre {
-    background-color: #FFCDD2;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 10px;
-    margin: 0 40px 15px 0px; }
+    margin: 0 0 10px 0; }
+  .AxiosError__list {
+    padding: 0; }
+    .AxiosError__item {
+      margin-bottom: 10px; }
+      .AxiosError__h2 {
+        font-size: 18px;
+        margin: 0 0 5px 0; }
+      .AxiosError__pre {
+        margin: 0;
+        background-color: #FFCDD2;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 10px; }
+
+@media (min-width: 1000px) {
+  .AxiosError {
+    padding: 20px; }
+  .AxiosError__h1 {
+    margin: 0; }
+    .AxiosError__list {
+      padding: 20px; }
+      .AxiosError__item {
+        margin-bottom: 20px; }
+}

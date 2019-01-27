@@ -68,12 +68,13 @@ class Form extends React.Component {
   }
 
   render() {
+    const { fields, className } = this.props
     return (
-      <div className="Form">
+      <div className={className ? 'Form' : className + ' Form'}>
         <Fields
           state={this.state}
           handleChange={this.handleChange}
-          fields={this.props.fields}
+          fields={fields}
         />
         <Submit
           handleSubmit={this.handleSubmit}
@@ -93,7 +94,8 @@ const SerializeForm = props => (
 
 SerializeForm.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  className: PropTypes.string
 }
 
 export default SerializeForm

@@ -1,45 +1,45 @@
 const express = require('express')
 
-const cookieParser = require('cookie-parser')
 const responseTime = require('response-time')
 const createError = require('http-errors')
+const compression = require('compression')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const path = require('path')
+const helmet = require('helmet')
 const cors = require('cors')
+const path = require('path')
 const fs = require('fs')
 
 // import api router
-const apiRouter = require('./api')
-
-// paths
-const accessLogFile = path.join(__dirname, 'access.log')
-const buildFolder = path.join(__dirname, 'build')
-const apiFolder = path.join(__dirname, 'api')
+const api = require('./src/api')
 
 const app = express()
 
-app.use(responseTime())
+// logger
+app.use(morgan('dev'))
 app.use(morgan(
   'dev',
-  { stream: fs.createWriteStream(accessLogFile, { flags: 'a' }) }
+  { stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' }) }
 ))
+
+app.use(responseTime())
+app.use(helmet())
+app.use(compression())
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
 
 // serve static website
-app.use(express.static(buildFolder))
+app.use(express.static(path.join(__dirname, 'build')))
 
 // route api requests
-app.use(apiFolder, apiRouter)
+app.use('/api', api)
 
 // catch 404 and forward to error handler
-app.use('/', (err, req, res, nxt) => nxt(createError(404)))
+app.use((err, req, res, nxt) => nxt(createError(404)))
 
 // error handler
-app.use('/', (err, req, res, nxt) => {
+app.use((err, req, res, nxt) => {
   res.status(err.status || 500)
   res.send(err.stack)
 })

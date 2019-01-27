@@ -1,0 +1,25 @@
+[
+  {
+    "firstName": "Oliver",
+    "familyName": "Plummer",
+    "gender": "male",
+    "dob": {
+      "year": 2000,
+      "month": 0,
+      "day": 1
+    },
+    "mobileNumber": {
+      "countryCode": "+61",
+      "phoneNumber": "0431694866"
+    },
+    "email": "oliver.plummer@outlook.com",
+    "state": "nsw",
+    "emailUpdates": false,
+    "key": "dc603a87-bf33-442f-bd40-c3e16cc8a644",
+    "date": {
+      "year": "2019",
+      "month": "01",
+      "day": "27"
+    }
+  }
+]

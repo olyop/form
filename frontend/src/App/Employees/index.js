@@ -56,9 +56,9 @@ class Employees extends React.Component {
           <h1 className="Employees__title">Employees</h1>
           <pre className="Employees__json">{JSON.stringify(this.state.employees, null, 2)}</pre>
           <Form
-            heading="Add Employee"
             fields={addEmployeesFormFields}
             handleSubmit={this.addEmployee}
+            className="Employees__form"
           />
         </div>
       )

@@ -4,27 +4,35 @@ import { upperFirst } from 'lodash'
 
 import './index.css'
 
-const AxiosErrorPre = props => (
+const errorHeadings = ['request', 'response']
+
+const AxiosErrorPre = ({ obj }) => (
   <pre className="AxiosError__pre">
-    {JSON.stringify(props.obj, null, 2)}
+    {JSON.stringify(obj, null, 2)}
   </pre>
 )
 
-const AxiosError = props => {
-  if (props.err.response) {
-    console.error(props.err.response.data)
-  }
+const AxiosErrorListItem = ({ item, err }) => (
+  <div className="AxiosError__item">
+    <h2 className="AxiosError__h2">{upperFirst(item)}</h2>
+    <AxiosErrorPre obj={err[item === 'request' ? 'config' : item] || {}} />
+  </div>
+)
+
+const AxiosError = ({ err }) => {
+  if (err.response) { console.error(err.response.data) }
   return (
     <div className="AxiosError">
-      <h1 className="AxiosError__h1">Axios Error </h1>
-      <ul>
-        {['config', 'response'].map((item, index) => (
-          <li key={index}>
-            <h2 className="AxiosError__h2">{upperFirst(item)}:</h2>
-            <AxiosErrorPre obj={props.err[item] || {}} />
-          </li>
+      <h1 className="AxiosError__h1">Axios Error</h1>
+      <div className="AxiosError__list">
+        {errorHeadings.map(item => (
+          <AxiosErrorListItem
+            key={item}
+            item={item}
+            err={err}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

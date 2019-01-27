@@ -1,5 +1,5 @@
 export const apiUrl = 'http://192.168.1.3:3001/api'
-export const apiUrlPeople = apiUrl + '/people'
+export const apiUrlPeople = apiUrl + '/employees'
 
 export const addEmployeesFormFields = [
   {
