@@ -1,7 +1,13 @@
 {
   "name": "form-test",
-  "version": "0.1.0",
+  "description": "form-test",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olyop/form.git"
+  },
   "private": false,
+  "version": "1.0.0",
+  "license": "ISC",
   "proxy": "http://192.168.1.3:3001",
   "dependencies": {
     "@material-ui/core": "^3.9.0",

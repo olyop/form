@@ -14,14 +14,13 @@ const path = require('path')
 const fs = require('fs')
 
 // import api router
-const api = require('./src/api')
+const api = require('./api')
 
 const app = express()
 
 mongoose.connect(
   'mongodb://localhost:27017/test',
-  { useNewUrlParser: true },
-  err => { if (err) throw err }
+  { useNewUrlParser: true }
 )
 
 // middleware stack
