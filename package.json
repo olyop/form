@@ -16,6 +16,8 @@
   "homepage": "https://github.com/olyop/form#readme",
   "scripts": {
     "front": "cd front && npm start",
-    "back": "cd back && npm start"
+    "back": "cd back && npm start",
+    "dependencies": "clear && cd front && npm i && cd .. && cd back && npm i && cd ..",
+    "update": "cd front && npm update && cd .. && cd back && npm update && cd .."
   }
 }

@@ -9,6 +9,10 @@ import Form from '../common/Form'
 
 import './index.css'
 
+const config = {
+  headers: { 'Accept': 'application/json' }
+}
+
 class Employees extends React.Component {
 
   constructor(props) {
@@ -18,13 +22,13 @@ class Employees extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(url)
+    axios.get(url, config)
       .then(res => this.setState({ employees: res.data }))
       .catch(err => this.setState({ employees: err }))
   }
 
   addEmployee = (data, callback) => {
-    axios.post(url, data)
+    axios.post(url, data, config)
       .then(res => {
         this.setState(
           { employees: concat(this.state.employees, res.data) },
@@ -54,12 +58,18 @@ class Employees extends React.Component {
       return (
         <div className="Employees">
           <h1 className="Employees__title">Employees</h1>
-          <pre className="Employees__json">{JSON.stringify(this.state.employees, null, 2)}</pre>
           <Form
             fields={addEmployeesFormFields}
             handleSubmit={this.addEmployee}
             className="Employees__form"
           />
+          <div className="Employees__list">
+            {this.state.employees.map(employee => (
+              <div className="Employee" key={employee._id}>
+                {employee.firstName} {employee.familyName}
+              </div>
+            ))}
+          </div>
         </div>
       )
     } else {

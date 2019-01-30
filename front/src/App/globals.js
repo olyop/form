@@ -1,4 +1,4 @@
-export const apiUrl = 'http://localhost:3001/api'
+export const apiUrl = 'http://127.0.0.1:3001/api'
 export const apiUrlPeople = apiUrl + '/employees'
 
 export const addEmployeesFormFields = [
@@ -31,7 +31,12 @@ export const addEmployeesFormFields = [
     name: 'Date of Birth',
     camelCase: 'dob',
     type: 'date',
-    required: true
+    required: true,
+    def: {
+      year: 2000,
+      month: 3,
+      day: 22
+    }
   },
   {
     name: 'Phone Number',

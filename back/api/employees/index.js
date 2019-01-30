@@ -2,37 +2,36 @@ const express = require('express')
 
 const mongoose = require('mongoose')
 const moment = require('moment')
-const uuid = require('uuid/v4')
 const path = require('path')
-const fs = require('fs')
 
 const { Employee } = require('../../db/models')
-Employee.createCollection()
+
+const newDateObj = date => ({
+  year: Number(date.format('YYYY')),
+  month: Number(date.format('MM')),
+  day: Number(date.format('DD'))
+})
 
 const app = express.Router()
 
-const newDateObj = date => ({
-  year: date.format('YYYY'),
-  month: date.format('MM'),
-  day: date.format('DD')
-})
-
 app.get('/', (req, res) => {
-  Employee
-    .find()
-    .exec((err, users) => {
+  Employee.find().exec(
+    (err, users) => {
+      if (err) throw err
+      res.type('application/json')
       res.send(users)
-    })
+    }
+  )
 })
 
 app.post('/', (req, res) => {
-  const newEmployee = {
-    ...req.body,
-    key: uuid(),
-    date: newDateObj(moment())
-  }
-  Employee.create(newEmployee)
-  res.send(newEmployee)
+  Employee.create(
+    { ...req.body, dateCreated: newDateObj(moment()) },
+    (err, doc) => {
+      if (err) { throw err }
+      else { res.send(doc) }
+    }
+  )
 })
 
 module.exports = app
