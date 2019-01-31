@@ -53,18 +53,9 @@ class Form extends React.Component {
     if (checkIfErrors(fieldsErr)) {
       this.setState({ fieldsErr: reduceToErrState(fieldsErr) })
     } else {
-      this.props.handleSubmit(this.state.fields, res => this.handleStatus(res))
+      this.props.handleSubmit(this.state.fields)
       this.setState(newState(this.props.fields))
     }
-  }
-
-  handleStatus = res => {
-    this.setState({ status: { code: res.status, text: res.statusText } }, () => {
-      setTimeout(
-        () => this.setState({ status: { code: null, text: '' } }),
-        5000
-      )
-    })
   }
 
   render() {
@@ -78,7 +69,6 @@ class Form extends React.Component {
         />
         <Submit
           handleSubmit={this.handleSubmit}
-          status={this.state.status}
         />
       </div>
     )

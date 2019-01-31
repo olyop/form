@@ -1,7 +1,7 @@
 import React from 'react'
 
 import axios from 'axios'
-import { concat, without, isNull, isArray, isError } from 'lodash'
+import { concat, isNull, isArray, isError } from 'lodash'
 import { apiUrlPeople as url, addEmployeesFormFields } from '../globals'
 
 import AxiosError from '../common/AxiosError'
@@ -29,23 +29,21 @@ class Employees extends React.Component {
       .catch(err => this.setState({ employees: err }))
   }
 
-  addEmployee = (data, callback) => {
+  addEmployee = data => {
     axios.post(url, data, config)
       .then(res => {
-        this.setState(
-          prevState => { employees: concat(prevState.employees, res.data) },
-          () => callback(res)
-        )
+        this.setState(prevState => ({ employees: concat(prevState.employees, res.data) }))
       })
       .catch(err => console.error(err))
   }
 
-  deleteEmployee = data => {
-    axios.delete(url, data, config)
+  deleteEmployee = _id => {
+    const config = { data: { _id } }
+    axios.delete(url, config)
       .then(res => {
-        this.setState(
-          prevState => { employees: without(prevState.employees, data) }
-        )
+        this.setState(prevState => ({
+          employees: prevState.employees.filter(x => x._id !== _id)
+        }))
       })
       .catch(err => console.error(err))
   }

@@ -3,7 +3,7 @@ import React from 'react'
 import './index.css'
 
 const Employee = ({ deleteEmployee, _id, firstName, familyName, mobileNumber, email }) => (
-  <div onClick={deleteEmployee(_id)} className="Employee">
+  <div className="Employee">
     <div className="Employee__info">
       <h1 className="Employee__name">
         {firstName} {familyName}
@@ -16,7 +16,11 @@ const Employee = ({ deleteEmployee, _id, firstName, familyName, mobileNumber, em
       </div>
     </div>
     <div className="Employee__delete">
-      <i className="Employee__delete-icon material-icons">delete</i>
+      <i
+        onClick={() => deleteEmployee(_id)}
+        className="Employee__delete-icon material-icons"
+        children="delete"
+      />
     </div>
   </div>
 )

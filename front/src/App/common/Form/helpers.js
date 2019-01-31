@@ -49,8 +49,7 @@ const mapStateWithValue = (fields, val) => fields.reduce(
 
 export const newState = fields => ({
   fields: mapAndInitState(fields),
-  fieldsErr: mapStateWithValue(fields, []),
-  status: { code: null, text: '' }
+  fieldsErr: mapStateWithValue(fields, [])
 })
 
 export const addStateValue = state => fields => fields.map(

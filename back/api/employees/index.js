@@ -37,11 +37,12 @@ app.post('/', (req, res, nxt) => {
 })
 
 app.delete('/', (req, res, nxt) => {
-  Employee.remove(
-    { _id: req.body },
+  const _id = req.body._id
+  Employee.deleteOne(
+    { _id },
     err => {
       if (err) { nxt(err) }
-      res.sendStatus(200)
+      res.send({ _id })
     }
   )
 })

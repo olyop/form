@@ -1,5 +1,6 @@
 .Employees {}
   .Employees__title {
     margin: 0;
+    background-color: #EEEEEE;
     padding: 20px;
     font-size: 30px; }
