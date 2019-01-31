@@ -1,0 +1,30 @@
+.EmployeesList {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; }
+
+.Employee {
+  background-color: #EEEEEE;
+  padding: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between; }
+  .Employee__name {
+    margin: 0;
+    font-size: 18px; }
+  .Employee__contact {
+    margin: 0;
+    font-size: 14px; }
+  .Employee__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .Employee__delete-icon {
+      cursor: pointer;
+      font-size: 23px;
+      padding: 10px;
+      transition: .2s all;
+      border-radius: 100%; }
+      .Employee__delete-icon:hover {
+        background-color: #BDBDBD; }

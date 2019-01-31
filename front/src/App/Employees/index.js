@@ -1,11 +1,12 @@
 import React from 'react'
 
 import axios from 'axios'
-import { concat, isNull, isArray, isError } from 'lodash'
+import { concat, without, isNull, isArray, isError } from 'lodash'
 import { apiUrlPeople as url, addEmployeesFormFields } from '../globals'
 
 import AxiosError from '../common/AxiosError'
 import Form from '../common/Form'
+import EmployeesList from './EmployeesList'
 
 import './index.css'
 
@@ -19,6 +20,7 @@ class Employees extends React.Component {
     super(props)
     this.state = { employees: null }
     this.addEmployee = this.addEmployee.bind(this)
+    this.deleteEmployee = this.deleteEmployee.bind(this)
   }
 
   componentDidMount() {
@@ -31,8 +33,18 @@ class Employees extends React.Component {
     axios.post(url, data, config)
       .then(res => {
         this.setState(
-          { employees: concat(this.state.employees, res.data) },
+          prevState => { employees: concat(prevState.employees, res.data) },
           () => callback(res)
+        )
+      })
+      .catch(err => console.error(err))
+  }
+
+  deleteEmployee = data => {
+    axios.delete(url, data, config)
+      .then(res => {
+        this.setState(
+          prevState => { employees: without(prevState.employees, data) }
         )
       })
       .catch(err => console.error(err))
@@ -63,13 +75,10 @@ class Employees extends React.Component {
             handleSubmit={this.addEmployee}
             className="Employees__form"
           />
-          <div className="Employees__list">
-            {this.state.employees.map(employee => (
-              <div className="Employee" key={employee._id}>
-                {employee.firstName} {employee.familyName}
-              </div>
-            ))}
-          </div>
+          <EmployeesList
+            employees={this.state.employees}
+            deleteEmployee={this.deleteEmployee}
+          />
         </div>
       )
     } else {
