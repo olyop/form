@@ -2,10 +2,10 @@ import React from 'react'
 
 import axios from 'axios'
 import { concat, isNull, isArray, isError } from 'lodash'
-import { apiUrlPeople as url, addEmployeesFormFields } from '../globals'
+import { apiUrlPeople as url, addEmployeesFormFields } from '../../globals'
 
-import AxiosError from '../common/AxiosError'
-import Form from '../common/Form'
+import AxiosError from '../../common/AxiosError'
+import Form from '../../common/Form'
 import EmployeesList from './EmployeesList'
 
 import './index.css'
@@ -18,7 +18,7 @@ class Employees extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { employees: null }
+    this.state = { employees: null, deleteLoading: null }
     this.addEmployee = this.addEmployee.bind(this)
     this.deleteEmployee = this.deleteEmployee.bind(this)
   }
@@ -32,50 +32,63 @@ class Employees extends React.Component {
   addEmployee = data => {
     axios.post(url, data, config)
       .then(res => {
-        this.setState(prevState => ({ employees: concat(prevState.employees, res.data) }))
+        this.setState(prevState => ({
+          employees: concat(prevState.employees, res.data)
+        }))
       })
-      .catch(err => console.error(err))
+      .catch(err => this.setState({ employees: err }))
   }
 
   deleteEmployee = _id => {
-    const config = { data: { _id } }
-    axios.delete(url, config)
-      .then(res => {
-        this.setState(prevState => ({
-          employees: prevState.employees.filter(x => x._id !== _id)
-        }))
-      })
-      .catch(err => console.error(err))
+    this.setState(
+      { deleteLoading: _id },
+      () => {
+        axios.delete(url, { data: { _id } })
+          .then(res => {
+            this.setState(prevState => ({
+              employees: prevState.employees.filter(x => x._id !== res.data._id),
+              deleteLoading: null
+            }))
+          })
+          .catch(err => {
+            this.setState({
+              employees: err,
+              deleteLoading: null
+            })
+          })
+      }
+    )
   }
 
   render() {
-    if (isError(this.state.employees)) {
+    const { employees, deleteLoading } = this.state
+    if (isError(employees)) {
       // error
       return (
         <div className="Employees">
-          <AxiosError err={this.state.employees} />
+          <AxiosError err={employees} />
         </div>
       )
-    } else if (isNull(this.state.employees)) {
+    } else if (isNull(employees)) {
       // loading
       return (
         <div className="Employees">
           <p>Loading...</p>
         </div>
       )
-    } else if (isArray(this.state.employees)) {
+    } else if (isArray(employees)) {
       // success
       return (
         <div className="Employees">
-          <h1 className="Employees__title">Employees</h1>
           <Form
             fields={addEmployeesFormFields}
             handleSubmit={this.addEmployee}
             className="Employees__form"
           />
           <EmployeesList
-            employees={this.state.employees}
+            employees={employees}
             deleteEmployee={this.deleteEmployee}
+            deleteLoading={deleteLoading}
           />
         </div>
       )

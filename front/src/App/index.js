@@ -1,12 +1,14 @@
 import React from 'react'
 
-import Employees from './Employees'
+import Header from './Header'
+import Content from './Content'
 
 import 'normalize.css/normalize.css'
 
 const App = props => (
   <div id="App">
-    <Employees />
+    <Header />
+    <Content />
   </div>
 )
 

@@ -7,9 +7,9 @@ const path = require('path')
 const { Employee } = require('../../db/models')
 
 const newDateObj = date => ({
-  year: Number(date.format('YYYY')),
-  month: Number(date.format('MM')),
-  day: Number(date.format('DD'))
+  year: parseInt(date.format('YYYY'), 10),
+  month: parseInt(date.format('MM'), 10),
+  day: parseInt(date.format('DD'), 10)
 })
 
 const app = express.Router()
@@ -19,8 +19,7 @@ app.get('/', (req, res, nxt) => {
     {},
     (err, users) => {
       if (err) { nxt(err) }
-      res.type('application/json')
-      res.send(users)
+      res.json(users)
     }
   )
 })
@@ -30,8 +29,7 @@ app.post('/', (req, res, nxt) => {
     { ...req.body, dateCreated: newDateObj(moment()) },
     (err, doc) => {
       if (err) { nxt(err) }
-      res.type('application/json')
-      res.send(doc)
+      res.json(doc)
     }
   )
 })
@@ -42,7 +40,7 @@ app.delete('/', (req, res, nxt) => {
     { _id },
     err => {
       if (err) { nxt(err) }
-      res.send({ _id })
+      res.json({ _id })
     }
   )
 })

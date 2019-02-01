@@ -1,8 +1,10 @@
 import React from 'react'
 
+import CircularProgress from '@material-ui/core/CircularProgress'
+
 import './index.css'
 
-const Employee = ({ deleteEmployee, _id, firstName, familyName, mobileNumber, email }) => (
+const Employee = ({deleteEmployee,deleteLoading,_id,firstName,familyName,mobileNumber,email}) => (
   <div className="Employee">
     <div className="Employee__info">
       <h1 className="Employee__name">
@@ -16,21 +18,24 @@ const Employee = ({ deleteEmployee, _id, firstName, familyName, mobileNumber, em
       </div>
     </div>
     <div className="Employee__delete">
-      <i
-        onClick={() => deleteEmployee(_id)}
-        className="Employee__delete-icon material-icons"
-        children="delete"
-      />
+      {deleteLoading === _id ? <CircularProgress /> : (
+        <i
+          onClick={() => deleteEmployee(_id)}
+          className="Employee__delete-icon material-icons"
+          children="delete"
+        />
+      )}
     </div>
   </div>
 )
 
-const EmployeesList = ({ employees, deleteEmployee }) => (
+const EmployeesList = ({ employees, deleteEmployee, deleteLoading }) => (
   <div className="EmployeesList">
     {employees.map(employee => (
       <Employee
         {...employee}
         deleteEmployee={deleteEmployee}
+        deleteLoading={deleteLoading}
         key={employee._id}
       />
     ))}
